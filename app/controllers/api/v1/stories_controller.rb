@@ -1,12 +1,12 @@
 class Api::V1::StoriesController < Api::V1::BaseController
   before_action :set_story, only: %i[ show update ]
 
-  def update
-    if @story.update(story_params)
-      render :show
-    else
-      render_error
-    end
+  def index
+    @stories = Story.all
+    # render json: @stories #Just for testing
+  end
+
+  def show
   end
 
   def create
@@ -17,15 +17,15 @@ class Api::V1::StoriesController < Api::V1::BaseController
       render_error
     end
   end
-end
 
-  def index
-    @stories = Story.all
-    # render json: @stories #Just for testing
+  def update
+    if @story.update(story_params)
+      render :show
+    else
+      render_error
+    end
   end
 
-  def show
-  end
 
   private
 
@@ -33,7 +33,7 @@ end
     @story = Story.find(params[:id])
   end
   def story_params
-    params.require(:story).permit(:name, :text)
+    params.require(:story).permit(:title, :content)
   end
 
   def render_error
