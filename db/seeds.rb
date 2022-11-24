@@ -11,7 +11,7 @@ Story.destroy_all
 puts 'creating new stories!'
 
 10.times do
-  Story.create!(title: Faker::Hipster.word, content: Faker::Hipster.sentences(number: 1))
+  Story.create!(title: Faker::Hipster.word, content: Faker::Hipster.sentences(number: 1)[0])
 end
 
 puts "Created #{Story.count} stories"

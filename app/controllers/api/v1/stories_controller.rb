@@ -1,13 +1,12 @@
 class Api::V1::StoriesController < Api::V1::BaseController
-  before_action :set_story, only: %i[ show update ]
+  before_action :set_story, only: %i[show update create]
 
   def index
     @stories = Story.all
     # render json: @stories #Just for testing
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @story = Story.new(story_params)
@@ -32,12 +31,13 @@ class Api::V1::StoriesController < Api::V1::BaseController
   def set_story
     @story = Story.find(params[:id])
   end
+
   def story_params
     params.require(:story).permit(:title, :content)
   end
 
   def render_error
     render json: { errors: @story.errors.full_messages },
-      status: :unprocessable_entity
+    status: :unprocessable_entity
   end
 end
