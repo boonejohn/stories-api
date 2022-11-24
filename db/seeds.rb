@@ -5,3 +5,13 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+puts 'destroying all stories!'
+Story.destroy_all
+
+puts 'creating new stories!'
+
+10.times do
+  Story.create!(title: Faker::Hipster.sentence, content: Faker::Hipster.sentences)
+end
+
+puts "Created #{Story.count} stories"
