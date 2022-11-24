@@ -9,6 +9,15 @@ class Api::V1::StoriesController < Api::V1::BaseController
     end
   end
 
+  def create
+    @story = Story.new(story_params)
+    if @story.save
+      render :show, status: :created
+    else
+      render_error
+    end
+  end
+end
 
   def index
     @stories = Story.all
